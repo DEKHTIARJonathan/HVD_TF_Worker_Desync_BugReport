@@ -44,5 +44,6 @@ else:
 
 model.fit(x=x, y=np.ones(1), verbose=2)
 print("rank {} completed step...".format(hvd.rank()))
+
 # Sleep to keep ranks from killing job prematurely
-time.sleep(10)
+time.sleep(30)
