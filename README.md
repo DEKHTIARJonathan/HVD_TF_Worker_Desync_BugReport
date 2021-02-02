@@ -17,8 +17,19 @@ https://github.com/DEKHTIARJonathan/HVD_TF_Worker_Desync_BugReport/blob/master/D
 1/1 - 3s - loss: nan
 rank 0 completed step...
 
+
+[2021-02-02 21:19:07.345988: W /tmp/pip-install-dxtho7yu/horovod_0bde588442554cf4b80c76441efc4e03/horovod/common/stall_inspector.cc:105] One or more tensors were submitted to be reduced, gathered or broadcasted by subset of ranks and are waiting for remainder of ranks for more than 10 seconds. This may indicate that different ranks are trying to submit different tensors or that only subset of ranks is submitting tensors, which will cause deadlock. 
+Missing ranks:
+0: [cond_1/then/_10/cond_1/SGD/PartitionedCall/DistributedSGD_Allreduce/cond/then/_79/DistributedSGD_Allreduce/cond/HorovodAllreduce_grads_0]
+
+
+[2021-02-02 21:19:17.346253: W /tmp/pip-install-dxtho7yu/horovod_0bde588442554cf4b80c76441efc4e03/horovod/common/stall_inspector.cc:105] One or more tensors were submitted to be reduced, gathered or broadcasted by subset of ranks and are waiting for remainder of ranks for more than 10 seconds. This may indicate that different ranks are trying to submit different tensors or that only subset of ranks is submitting tensors, which will cause deadlock. 
+Missing ranks:
+0: [cond_1/then/_10/cond_1/SGD/PartitionedCall/DistributedSGD_Allreduce/cond/then/_79/DistributedSGD_Allreduce/cond/HorovodAllreduce_grads_0]
+
+
 Traceback (most recent call last):
-  File "main.py", line 53, in <module>
+  File "main.py", line 45, in <module>
     model.fit(x=x, y=np.ones(1), verbose=2)
   File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/keras/engine/training.py", line 1134, in fit
     tmp_logs = self.train_function(iterator)
@@ -48,7 +59,8 @@ a non-zero exit code. Per user-direction, the job has been aborted.
 mpirun detected that one or more processes exited with non-zero status, thus causing
 the job to be terminated. The first process to do so was:
 
-  Process name: [[56373,1],1]
+  Process name: [[56671,1],1]
   Exit code:    1
 --------------------------------------------------------------------------
+
 ```
