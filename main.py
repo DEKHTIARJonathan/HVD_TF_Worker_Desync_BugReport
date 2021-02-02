@@ -33,15 +33,7 @@ if args.use_amp:
 opt = tf.keras.optimizers.SGD(learning_rate=1e-6)
 opt = hvd.DistributedOptimizer(opt)
 
-#if True:
-if False:
-    def my_loss_fn(y_true, y_pred):
-        squared_difference = tf.square(y_true - y_pred)
-        return tf.reduce_mean(squared_difference, axis=-1)
-
-    model.compile(optimizer=opt, loss=my_loss_fn)
-else:
-    model.compile(optimizer=opt, loss='mae')
+model.compile(optimizer=opt, loss='mae')
 
 # On rank 0, set input to NaN to generate NaN gradient
 if hvd.rank() == 0:
@@ -54,4 +46,3 @@ model.fit(x=x, y=np.ones(1), verbose=2)
 print("rank {} completed step...".format(hvd.rank()))
 # Sleep to keep ranks from killing job prematurely
 time.sleep(10)
-

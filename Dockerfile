@@ -46,12 +46,13 @@ ENV HOROVOD_WITH_TENSORFLOW=1
 ENV HOROVOD_WITHOUT_PYTORCH=1
 ENV HOROVOD_WITHOUT_MXNET=1
 
-# =========== Uncomment the one you want to build
+# =========== Uncomment the one you want to build ============== #
 # Latest release on PyPI
 ENV HOROVOD_FLAVOR="STABLE"
 
 # Latest commit on Github
 # ENV HOROVOD_FLAVOR="LATEST"
+# =========== Uncomment the one you want to build ============== #
 
 # For long running tasks that would slow down deployments
 RUN ldconfig /usr/local/cuda/targets/x86_64-linux/lib/stubs && \
@@ -65,7 +66,8 @@ RUN ldconfig /usr/local/cuda/targets/x86_64-linux/lib/stubs && \
     ldconfig
 
 # Install SSH otherwise MPI won't run
-RUN apt-get install -y --no-install-recommends openssh-client openssh-server && \
+RUN rm -f rm /etc/apt/sources.list.d/nvidia-ml.list && \
+    apt-get update && apt-get install -y --no-install-recommends openssh-client openssh-server && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace
