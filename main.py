@@ -24,11 +24,6 @@ if args.use_amp:
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Dense(1, use_bias=False))
 
-# Enable AMP (this position works)
-if args.use_amp:
-    policy = tf.keras.mixed_precision.experimental.Policy('mixed_float16')
-    tf.keras.mixed_precision.experimental.set_policy(policy)
-
 # Create optimizer
 opt = tf.keras.optimizers.SGD(learning_rate=1e-6)
 opt = hvd.DistributedOptimizer(opt)
